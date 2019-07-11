@@ -27,8 +27,12 @@ func (c *Contract) SubmitTransaction(fcn string, args [][]byte) error {
 	fmt.Println("Guess it worked")
 	return nil
 }
-func (c *Contract) Query() (string, error) {
-	return "", nil
+func (c *Contract) Query(fcn string, args [][]byte) ([]byte, error) {
+	response, err := c.channel.Query(channel.Request{ChaincodeID: c.ccid, Fcn: fcn, Args: args})
+	if err != nil {
+		fmt.Printf("failed to query chaincode: %s\n", err)
+	}
+	return response.Payload, nil
 }
 
 func newContract(ccid string, channel *channel.Client) *Contract { //TODO should strings be pointers ?

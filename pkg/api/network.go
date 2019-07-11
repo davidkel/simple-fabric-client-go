@@ -48,10 +48,10 @@ func (network *Network) Init(ccp string, networkOptions *NetworkOptions) error {
 	switch v := creds.(type) {
 	case *X509Identity:
 		network.si, err = mspClient.CreateSigningIdentity(othermsp.WithCert([]byte(v.GetCert())), othermsp.WithPrivateKey([]byte(v.GetKey())))
-		fmt.Println("cert:", v.GetCert(), "key:", v.GetKey())
+		//fmt.Println("cert:", v.GetCert(), "key:", v.GetKey())
 	}
 
-	fmt.Println(creds)
+	//fmt.Println(creds)
 	network.id = creds
 	network.sdk = sdk
 

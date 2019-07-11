@@ -36,7 +36,6 @@ func (x *X509IdentityHandler) GetElements(id IdentityType) map[string]string {
 func (x *X509IdentityHandler) FromElements(elements map[string]string) IdentityType {
 	y := &X509Identity{Identity{"X509"}, elements["cert"], elements["key"]}
 	return y
-	//return Identity{"X509"}
 }
 
 func NewX509IdentityHandler() *X509IdentityHandler {
