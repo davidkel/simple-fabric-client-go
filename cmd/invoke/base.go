@@ -65,7 +65,6 @@ EHDlZdXELzv1alY4GavheQ+L9rMDKlnw0/N4HDTT
 
 	idhandler := api.NewX509IdentityHandler()
 	wallet := api.NewInMemoryWallet(idhandler)
-	// TODO: Need to pull in valid credentials here
 	wallet.Import(myid, api.NewX509Identity(testCert, testPrivKey))
 
 	f := api.NewNetwork()

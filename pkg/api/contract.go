@@ -7,6 +7,11 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 )
 
+type ClientInterface interface {
+	Execute(r channel.Request, o ...channel.RequestOption) (channel.Response, error)
+	Query(r channel.Request, o ...channel.RequestOption) (channel.Response, error)
+}
+
 type ContractInterface interface {
 	SubmitTransaction() error
 	Query() (string, error)
@@ -14,7 +19,8 @@ type ContractInterface interface {
 
 type Contract struct {
 	ccid    string
-	channel *channel.Client
+	channel ClientInterface
+	//channel *channel.Client
 }
 
 func (c *Contract) SubmitTransaction(fcn string, args [][]byte) error {
@@ -35,6 +41,7 @@ func (c *Contract) Query(fcn string, args [][]byte) ([]byte, error) {
 	return response.Payload, nil
 }
 
-func newContract(ccid string, channel *channel.Client) *Contract { //TODO should strings be pointers ?
+//func newContract(ccid string, channel *channel.Client) *Contract {
+func newContract(ccid string, channel ClientInterface) *Contract {
 	return &Contract{ccid, channel}
 }
